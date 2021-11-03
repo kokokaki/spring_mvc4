@@ -12,7 +12,8 @@ public class LoginController {
     @GetMapping("/s-login-form")
     public String sLoginForm() {
         System.out.println("로그인 양식 오픈!!");
-        return "/WEB-INF/views/s-form.jsp";
+//        return "/WEB-INF/views/s-form.jsp";
+        return "s-form";
     }
 
     //로그인 검증 요청처리
@@ -29,6 +30,6 @@ public class LoginController {
             model.addAttribute("result", "idFail");
         }
         //jsp파일 열기
-        return "/WEB-INF/views/s-result.jsp";
+        return "s-result";
     }
 }

@@ -1,12 +1,15 @@
 package com.spring.mvc.controller;
 
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 //역할: 브라우저의 요청을 처리
 @Controller
+@Log4j2 //로그를 만들어주는 기능
 public class BasicController {
 
     //요청 처리 메서드
@@ -21,6 +24,26 @@ public class BasicController {
            1. redirect - 재요청
            2. forward  - 단순한 파일열기
          */
-        return "redirect:/s-login-form";
+        //forward시에는 열어야 할 jsp의 경로를 문자열로 입력
+        return "test";
+//        return "redirect:/s-login-form";
+    }
+
+    // 사용자의 요청 URI : /req/ex
+    // 응답시에 views폴더 아래에 req_ex폴더 아래에 있는 v1.jsp를 열어야함
+    @GetMapping("/req/ex")
+    public String ex() {
+        return "req_ex/v1";
+    }
+
+    @GetMapping("/req/v1")
+    public String v1() {
+        log.info("/req/v1 GET!");
+        return "req_ex/v1";
+    }
+    @PostMapping("/req/v1")
+    public String v1Post() {
+        log.info("/req/v1 POST!");
+        return "req_ex/v1";
     }
 }
