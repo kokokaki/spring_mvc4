@@ -3,10 +3,11 @@ package com.spring.mvc.controller;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 
 //역할: 브라우저의 요청을 처리
 @Controller
@@ -89,6 +90,26 @@ public class BasicController {
         model.addAttribute("f", foods[rn]);
         model.addAttribute("foods", foods);
         return "req_ex/result";
+    }
+
+    //=============== quiz =============//
+    @GetMapping("/req/quiz")
+    public String quiz() {
+        return "req_ex/req_quiz";
+    }
+
+    @PostMapping("/req/quiz")
+    public String quiz(
+            @RequestParam("userAccount") String id
+            , @RequestParam("userPassword") String pw
+            , Model model) {
+
+        model.addAttribute("account", id);
+        if (id.equals("kim123") && pw.equals("kkk1234")) {
+            return "req_ex/success";
+        } else {
+            return "req_ex/fail";
+        }
     }
 
 }
