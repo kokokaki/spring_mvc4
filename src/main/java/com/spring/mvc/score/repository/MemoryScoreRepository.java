@@ -41,7 +41,7 @@ public class MemoryScoreRepository implements ScoreRepository {
 
     @Override
     public Score findOne(int stuNum) {
-        return null;
+        return scoreMap.get(stuNum);
     }
 
     @Override
