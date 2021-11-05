@@ -44,4 +44,13 @@ public class ScoreController {
         model.addAttribute("scores", scores);
         return "score/score-list";
     }
+
+    //성적정보 삭제 요청처리
+    @GetMapping("/score/delete")
+    public String delete(int stuNum) {
+        log.info("/score/delete GET!! - " + stuNum);
+        scoreRepository.remove(stuNum);
+        return "redirect:/score/list";
+    }
+
 }

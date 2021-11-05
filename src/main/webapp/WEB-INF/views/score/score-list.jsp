@@ -72,10 +72,38 @@
                 # 학번: ${s.stuNum}, 이름: ${s.name}, 국어: ${s.kor}점, 
                 영어: ${s.eng}점, 수학: ${s.math}점, 총점: ${s.total}점
                 , 평균: ${s.average}점 
-                <a href="#">삭제</a>
+                <a class="del-btn" href="/score/delete?stuNum=${s.stuNum}">삭제</a>
             </li>
         </c:forEach>
     </ul>
+
+    <script>
+
+        const $ul = document.querySelector('.score-list');
+
+        $ul.addEventListener('click', e => {
+            if (!e.target.matches('a.del-btn')) return;
+            
+            e.preventDefault();
+            //console.log('클릭이벤트 발동!');
+
+            if(confirm('정말로 삭제하시겠습니까?')) {
+                //삭제 진행                
+                location.href = e.target.getAttribute('href');
+            } else {
+                //삭제 취소
+                return;
+            }            
+
+        });
+
+        //홈화면으로 버튼 이벤트
+        const $homeBtn = document.getElementById('go-home');
+        $homeBtn.onclick = e => {
+            location.href = '/';
+        };
+
+    </script>
 
 </body>
 </html>

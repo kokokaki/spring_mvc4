@@ -24,4 +24,11 @@ public class Score {
         this.stuNum = ++seq;
     }
 
+    public Score(String name, int kor, int eng, int math) {
+        this();
+        this.name = name;
+        this.kor = kor;
+        this.eng = eng;
+        this.math = math;
+    }
 }
