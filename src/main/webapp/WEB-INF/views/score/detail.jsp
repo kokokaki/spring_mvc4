@@ -4,10 +4,8 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+
+    <%@ include file="../include/static-head.jsp" %>
 
     <style>
         li {
@@ -16,15 +14,18 @@
             padding: 0;
             font-size: 1.4em;
         }
-        section {
+
+        section.score-main {
             width: 30%;
-            margin: 0 auto;
+            margin: 0 auto 150px;
             padding: 20px;
             border: 2px solid orange;
             border-radius: 10px;
             box-shadow: 2px 2px 5px orangered;
+            transform: translateY(200px);
         }
-        a {
+
+        a.list-btn {
             display: block;
             width: fit-content;
             text-decoration: none;
@@ -41,20 +42,28 @@
 
 <body>
 
-    <section>
-        <h1>${s.name}님 성적 정보</h1>
-        <ul>
-            <li># 국어: ${s.kor}점</li>
-            <li># 영어: ${s.eng}점</li>
-            <li># 수학: ${s.math}점</li>
-            <li># 총점: ${s.total}점</li>
-            <li># 평균: ${s.average}점</li>
-            <li># 학점: ${s.grade}</li>
-        </ul>
-        <div class="btn-group">
-            <a href="/score/list">목록</a>
-        </div>
-    </section>
+    <div class="wrap">
+
+        <%@ include file="../include/header.jsp" %>
+
+        <section class="score-main">
+            <h1>${s.name}님 성적 정보</h1>
+            <ul>
+                <li># 국어: ${s.kor}점</li>
+                <li># 영어: ${s.eng}점</li>
+                <li># 수학: ${s.math}점</li>
+                <li># 총점: ${s.total}점</li>
+                <li># 평균: ${s.average}점</li>
+                <li># 학점: ${s.grade}</li>
+            </ul>
+            <div class="btn-group">
+                <a class="list-btn" href="/score/list">목록</a>
+            </div>
+        </section>
+
+        <%@ include file="../include/footer.jsp" %>
+
+    </div>
 </body>
 
 </html>
