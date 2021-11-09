@@ -70,9 +70,9 @@
             </div>
 
             <div class="btn-group btn-group-lg custom-btn-group" role="group" >
-                <button type="button" class="btn btn-warning">수정</button>
-                <button type="button" class="btn btn-danger">삭제</button>
-                <button type="button" class="btn btn-dark">목록</button>
+                <button id="mod-btn" type="button" class="btn btn-warning">수정</button>
+                <button id="del-btn" type="button" class="btn btn-danger">삭제</button>
+                <button id="list-btn" type="button" class="btn btn-dark">목록</button>
             </div>
 
         </div>
@@ -80,6 +80,30 @@
 
         <%@ include file="../include/footer.jsp" %>
     </div>
+
+
+    <script>
+        const [$modBtn, $delBtn, $listBtn] 
+           = [...document.querySelector('div[role=group]').children];
+
+        // const $modBtn = document.getElementById('mod-btn');
+        //수정버튼
+        $modBtn.onclick = e => {
+            location.href = '/board/modify?boardNo=${b.boardNo}';
+        };
+
+        //삭제버튼
+        $delBtn.onclick = e => {
+            if(!confirm('정말 삭제하시겠습니까?')) {
+                return;
+            }
+            location.href = '/board/delete?boardNo=${b.boardNo}';
+        };
+        //목록버튼
+        $listBtn.onclick = e => {
+            location.href = '/board/list';
+        };
+    </script>
 
 </body>
 
