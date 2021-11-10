@@ -4,6 +4,7 @@ import com.spring.mvc.score.domain.Grade;
 import com.spring.mvc.score.domain.Score;
 import com.spring.mvc.score.repository.ScoreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,7 +16,8 @@ public class ScoreService {
     private final ScoreRepository scoreRepository;
 
     @Autowired
-    public ScoreService(ScoreRepository scoreRepository) {
+    public ScoreService(
+            @Qualifier("jr") ScoreRepository scoreRepository) {
         this.scoreRepository = scoreRepository;
     }
 

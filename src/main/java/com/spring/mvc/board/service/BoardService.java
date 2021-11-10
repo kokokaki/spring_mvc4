@@ -5,6 +5,7 @@ import com.spring.mvc.board.dto.ModBoard;
 import com.spring.mvc.board.repository.BoardRepository;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Autowired
-    public BoardService(BoardRepository boardRepository) {
+    public BoardService(@Qualifier("jbr") BoardRepository boardRepository) {
         this.boardRepository = boardRepository;
     }
 
@@ -25,11 +26,12 @@ public class BoardService {
     public List<Board> getList() {
         List<Board> articles = boardRepository.getArticles();
         //역정렬
-        List<Board> sortedList = new ArrayList<>();
-        for (int i = articles.size() - 1; i >= 0 ; i--) {
-            sortedList.add(articles.get(i));
-        }
-        return sortedList;
+//        List<Board> sortedList = new ArrayList<>();
+//        for (int i = articles.size() - 1; i >= 0 ; i--) {
+//            sortedList.add(articles.get(i));
+//        }
+//        return sortedList;
+        return articles;
     }
 
     //글쓰기 중간처리

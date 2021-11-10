@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class JDBCBasicCRUD {
 
@@ -111,6 +112,40 @@ public class JDBCBasicCRUD {
                 System.out.println("삭제 성공!");
             }
             Assertions.assertTrue(resultNum == 1);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    @DisplayName("product테이블을 전체 조회해야 한다.")
+    void findAllTest() {
+
+        try (Connection conn
+                     = DriverManager.getConnection(url, id, pw)) {
+            //1. 드라이버 로딩
+            Class.forName(driver);
+            //2. 연결정보 객체 생성
+
+            //3. SQL 실행객체 생성
+            String sql = "SELECT * FROM product";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+
+            //4. ?값 채우기
+
+            //5. SQL 실행 명령
+            // a : INSERT, UPDATE, DELETE  -  executeUpdate()
+            // b : SELECT                  -  executeQuery()
+            ResultSet rs = pstmt.executeQuery();
+
+            while (rs.next()) {
+                String name = rs.getString("product_name");
+                int price = rs.getInt("product_price");
+                System.out.printf("제품명: %s, 가격: %d원\n", name, price);
+            }
+
 
         } catch (Exception e) {
             e.printStackTrace();
