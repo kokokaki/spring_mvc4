@@ -6,6 +6,8 @@ import lombok.ToString;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Setter @Getter @ToString
 public class Board {
@@ -14,6 +16,10 @@ public class Board {
     private String writer; //작성자
     private String title; //글제목
     private String content; //글내용
+    private Date regDate; //작성시간
+    private int viewCnt;; //조회수
+
+    private String regDateStr; //포맷팅된 날짜문자열
 
     private static long seq;
 
