@@ -52,10 +52,15 @@
                     <tr>
                         <td>${b.boardNo}</td>
                         <td>${b.writer}</td>
-                        <td>${b.title}</td>
+                        <td>
+                            ${b.title}
+                            <c:if test="${b.newFlag}">
+                                <span class="badge rounded-pill bg-danger">new</span>
+                            </c:if>
+                        </td>
                         <td>${b.viewCnt}</td>
                         <td>
-                            <fmt:formatDate value="${b.regDate}" pattern="yyyy년 MM월 dd일 hh:mm" />                            
+                            <fmt:formatDate value="${b.regDate}" pattern="yyyy년 MM월 dd일 a hh:mm" />                            
                         </td>
                     </tr>
                 </c:forEach>
