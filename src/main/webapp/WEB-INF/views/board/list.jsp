@@ -21,13 +21,39 @@
             border-radius: 10px;
         }
 
-        .board-list .btn-write {
-            /* background: orange; */
-            text-align: right;
-            position: relative;
-            top: -70px;
+        .board-list .bottom-section {
+            display: flex;
+            margin-top: -50px;
+        }
+        .board-list .bottom-section ul {
+            flex: 9;
+            display: flex;
+            justify-content: center;
+        }
+        .pagination-custom a {
+            color: #444 !important;
+        }
+        .pagination-custom li.active a {
+            background: #333 !important;
+            color: #fff !important;
         }
 
+        .board-list .bottom-section .btn-write {
+            flex: 1;
+            /* background: orange; */
+            /* text-align: right;
+            position: relative;
+            top: -70px; */
+        }
+
+        .board-list .amount {
+            position: absolute;
+            top: 21%;
+            right: 16%;            
+        }
+        .board-list .amount a {
+            width: 80px;
+        }
 
     </style>
 </head>
@@ -39,6 +65,13 @@
         <%@ include file="../include/header.jsp" %>
 
         <div class="board-list">
+            
+            <div class="amount">
+                <a class="btn btn-danger" href="/board/list?amount=10">10</a>
+                <a class="btn btn-danger" href="/board/list?amount=20">20</a>
+                <a class="btn btn-danger" href="/board/list?amount=30">30</a>
+            </div>
+            
             <table class="table table-dark table-striped table-hover articles">
                 <tr>
                     <th>번호</th>
@@ -66,8 +99,26 @@
                 </c:forEach>
             </table>
 
-            <div class="btn-write">
-                <a class="btn btn-outline-danger btn-lg" href="/board/write">글쓰기</a>
+            <div class="bottom-section">
+
+                <ul class="pagination pagination-lg pagination-custom">
+                    
+                    <c:if test="${pageInfo.prev}">
+                        <li class="page-item"><a class="page-link" href="/board/list?pageNum=${pageInfo.beginPage - 1}">prev</a></li>
+                    </c:if>
+                   
+                    <c:forEach var="i" begin="${pageInfo.beginPage}" end="${pageInfo.endPage}" step="1">
+                        <li class="page-item"><a class="page-link" href="/board/list?pageNum=${i}">${i}</a></li>
+                    </c:forEach>
+                    
+                    <c:if test="${pageInfo.next}">
+                        <li class="page-item"><a class="page-link" href="/board/list?pageNum=${pageInfo.endPage + 1}">next</a></li>
+                    </c:if>
+                </ul>
+
+                <div class="btn-write">
+                    <a class="btn btn-outline-danger btn-lg" href="/board/write">글쓰기</a>
+                </div>
             </div>
         </div>
 
@@ -89,6 +140,27 @@
 
             location.href = '/board/content?boardNo=' + bn;
         });
+
+
+
+        // 현재 위치한 페이지에 active클래스 부여하기
+        function appendPageActive() {
+            //현재 위치한 페이지 넘버
+            const curPage = '${pageInfo.page.pageNum}';
+            // console.log('현재페이지:', curPage);
+
+            //ul의 li들을 전부 확인해서 그 텍스트컨텐츠(페이지넘버)가 
+            //현재 위치한 페이지 넘버와 같은 li에게 class="active" 부여
+            const $ul = document.querySelector('.pagination');
+            for (let $li of [...$ul.children]) {
+                if ($li.textContent === curPage) {
+                    $li.classList.add('active');
+                    break;
+                }
+            }
+        }
+
+        appendPageActive();
 
     </script>
 
