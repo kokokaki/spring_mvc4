@@ -5,6 +5,9 @@ import com.spring.mvc.board.dto.ModBoard;
 import com.spring.mvc.board.service.BoardService;
 import com.spring.mvc.common.paging.Page;
 import com.spring.mvc.common.paging.PageMaker;
+import com.spring.mvc.reply.domain.Reply;
+import com.spring.mvc.reply.service.ReplyService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +22,7 @@ import java.util.List;
 @Controller
 @Log4j2
 @RequestMapping("/board")
+@RequiredArgsConstructor
 public class BoardController {
 
     /**
@@ -32,10 +36,6 @@ public class BoardController {
      */
     private final BoardService boardService;
 
-    @Autowired
-    public BoardController(BoardService boardService) {
-        this.boardService = boardService;
-    }
 
     @GetMapping("/list")
     public String list(Model model, Page page) {
